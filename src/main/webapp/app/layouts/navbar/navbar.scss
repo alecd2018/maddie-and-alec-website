@@ -45,10 +45,13 @@ Navbar
 Logo styles
 ========================================================================== */
 .logo-img {
-  height: 45px;
+  height: 38px;
   width: 45px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/ALDI_2020.png') no-repeat center center;
   background-size: contain;
+  filter: hue-rotate(320deg);
+  border: 2px solid white;
+  border-radius: 3px;
 }

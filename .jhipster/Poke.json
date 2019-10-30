@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "heartTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mailTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "massageTime",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20191028185239",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "poke_table",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

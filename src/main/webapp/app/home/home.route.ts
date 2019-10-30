@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 
+// import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { HomeComponent } from './home.component';
 
 export const HOME_ROUTE: Route = {
@@ -9,4 +10,5 @@ export const HOME_ROUTE: Route = {
     authorities: [],
     pageTitle: 'Welcome, Java Hipster!'
   }
+  // canActivate: [UserRouteAccessService]
 };
