@@ -8,9 +8,7 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(): boolean {
     if (!this.accountService.isAuthenticated()) {
-      // eslint-disable-next-line no-console
-      console.log('LOGINATTEMPT');
-      this.router.navigate(['gate']);
+      this.router.navigate(['account/gate']);
       return false;
     }
 
