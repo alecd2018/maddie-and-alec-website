@@ -23,6 +23,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     BrowserModule,
     AlecSharedModule,
     AlecCoreModule,
+    // AlecTestModule,
     AlecHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     AlecEntityModule,

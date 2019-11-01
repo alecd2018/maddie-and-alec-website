@@ -1,17 +1,22 @@
-import { Component, AfterViewInit, Renderer, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer, ElementRef } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { FormBuilder } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { JhiEventManager } from 'ng-jhipster';
+
+import { AccountService } from 'app/core/auth/account.service';
 
 import { LoginService } from 'app/core/login/login.service';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
 
 @Component({
-  selector: 'jhi-login-modal',
-  templateUrl: './login.component.html'
+  selector: 'jhi-gate',
+  templateUrl: './gate.component.html'
 })
-export class JhiLoginModalComponent implements AfterViewInit {
+export class GateComponent implements OnInit, OnDestroy {
+  currentAccount: any;
+  eventSubscriber: Subscription;
   authenticationError: boolean;
 
   loginForm = this.fb.group({
@@ -21,7 +26,10 @@ export class JhiLoginModalComponent implements AfterViewInit {
   });
 
   constructor(
-    private eventManager: JhiEventManager,
+    // protected testService: TestService,
+    protected jhiAlertService: JhiAlertService,
+    protected eventManager: JhiEventManager,
+    protected accountService: AccountService,
     private loginService: LoginService,
     private stateStorageService: StateStorageService,
     private elementRef: ElementRef,
@@ -31,17 +39,20 @@ export class JhiLoginModalComponent implements AfterViewInit {
     private fb: FormBuilder
   ) {}
 
-  ngAfterViewInit() {
-    setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []), 0);
+  ngOnInit() {
+    // eslint-disable-next-line no-console
+    console.log('GATE WOOO');
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
   }
 
-  cancel() {
-    this.authenticationError = false;
-    this.loginForm.patchValue({
-      username: '',
-      password: ''
-    });
-    this.activeModal.dismiss('cancel');
+  ngOnDestroy() {
+    this.eventManager.destroy(this.eventSubscriber);
+  }
+
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
   }
 
   login() {
@@ -73,10 +84,11 @@ export class JhiLoginModalComponent implements AfterViewInit {
         if (redirect) {
           this.stateStorageService.storeUrl(null);
           this.router.navigateByUrl(redirect);
-        } else {
-          this.stateStorageService.storeUrl(null);
-          this.router.navigate(['/']);
         }
+        // } else {
+        //   this.stateStorageService.storeUrl(null);
+        //   this.router.navigate(['/']);
+        // }
         // this.stateStorageService.storeUrl(null);
         // this.router.navigateByUrl('/');
       })
