@@ -6,11 +6,8 @@
 
         <div [ngSwitch]="isAuthenticated()">
             <div *ngSwitchCase="true">
-                <!-- <h1 class="display-4">Welcome, {{account.firstName}}!</h1> -->
                 <h1 class="display-4">Welcome, Madeleine!</h1>
                 <p class="lead">This is your dashboard. You can see your coupon totals here.</p>
-                <!-- <input type="image" src="../../content/images/heart.png" 
-                class="button rounded-circle shadow-none bother-image" (click)="mytest()"/> -->
                 <div class="row bottom-row">
                     <div class="col-btn">
                         <button id="heartButton" class="btn btn-danger btn-circle" (click)="pokeClick('heart')"><img class="btn-image lower" src="../../content/images/heart.png"/></button>
@@ -26,11 +23,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account">
-                     You are logged in as user "{{account.login}}".
-                </span>
-            </div> -->
 
             <div *ngSwitchCase="false">
                 <h1 class="display-4">Welcome!</h1>

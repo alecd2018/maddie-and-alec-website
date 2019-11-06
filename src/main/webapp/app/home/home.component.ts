@@ -76,10 +76,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // const loggedIn = this.isAuthenticated();
-    // if (loggedIn){
-    //   //eslint-disable-next-line no-console
-    //   console.log("Hey there.");
     this.accountService.identity().then(account => {
       this.account = account;
     });
@@ -89,27 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.timeToHeart = this.updateTimes(this.currPoke.heartTime, 10, 'heart');
       this.timeToMail = this.updateTimes(this.currPoke.mailTime, 15, 'mail');
       this.timeToMassage = this.updateTimes(this.currPoke.massageTime, 60, 'massage');
-    }, 1000);
-    // }
-
-    // setInterval(() => {
-
-    //   const prevCheck = loggedIn;
-    //   loggedIn = this.isAuthenticated();
-
-    //   if (loggedIn && (loggedIn !== prevCheck)){
-    //     this.accountService.identity().then(account => {
-    //       this.account = account;
-    //     });
-    //     this.loadAll()
-    //     this.activatePolling(true);
-    //   } else if (!loggedIn && (loggedIn !== prevCheck)){
-    //     this.activatePolling(false);
-    //   }
-
-    // eslint-disable-next-line no-console
-    // console.log(k);
-    // },1000);
+    }, 500);
   }
 
   isAuthenticated() {

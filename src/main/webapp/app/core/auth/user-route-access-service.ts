@@ -23,9 +23,17 @@ export class UserRouteAccessService implements CanActivate {
   }
 
   checkLogin(authorities: string[], url: string): Promise<boolean> {
-    return this.accountService.identity().then(account => {
+    return this.accountService.identity(true).then(account => {
       if (!authorities || authorities.length === 0) {
         return true;
+      }
+      // eslint-disable-next-line no-console
+      console.log(account);
+      if (account === undefined) {
+        this.router.navigate(['account/gate']);
+        return false;
+      } else if (account === null) {
+        this.router.navigate(['account/gate']);
       }
 
       if (account) {
