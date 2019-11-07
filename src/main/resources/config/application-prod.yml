@@ -52,11 +52,22 @@ spring:
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
+  # mail:
+  #   host: localhost
+  #   port: 25
+  #   username:
+  #   password:
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: smtp.gmail.com
+    port: 587
+    username: ald01845@gmail.com #Replace this field with your Gmail username.
+    password: Love2vball #Replace this field with your Gmail password/App password.
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com
   thymeleaf:
     cache: true
 

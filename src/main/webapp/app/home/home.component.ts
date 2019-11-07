@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   timeToMassage: any;
   hideHeartTime: boolean;
   pollPokes: any;
+  alertMessage: string;
 
   constructor(
     private accountService: AccountService,
@@ -107,16 +108,31 @@ export class HomeComponent implements OnInit, OnDestroy {
     const time = Date.now();
     if (pokeType === 'heart') {
       this.currPoke.heartTime = time.toString();
+      this.alertMessage = 'Alec has been notified that you want to bother him.';
     } else if (pokeType === 'mail') {
       this.currPoke.mailTime = time.toString();
+      this.alertMessage = 'Alec has been notified that you want mail.';
     } else {
       this.currPoke.massageTime = time.toString();
+      this.alertMessage = 'Alec has been notified that you want a massage.';
     }
 
-    this.homeService.update(this.currPoke).subscribe();
+    this.homeService.update(this.currPoke).subscribe(
+      res => {
+        $('#poke-success')
+          .fadeIn()
+          .delay(3000)
+          .fadeOut();
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   protected onError(errorMessage: string) {
+    $('#poke-failure')
+      .fadeIn()
+      .delay(3000)
+      .fadeOut();
     this.jhiAlertService.error(errorMessage, null, null);
   }
 }

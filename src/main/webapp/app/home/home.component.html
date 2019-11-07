@@ -1,9 +1,16 @@
+<div class='alert-container'>
+    <div id="poke-success" class="alert alert-success" role="alert">
+        Success! {{alertMessage}}
+    </div>
+    <div id="poke-failure" class="alert alert-danger" role="alert">
+        Failed to send Alec an alert.
+    </div>
+</div>
 <div class="row">
     <div class="col-md-3">
         <span class="hipster img-fluid rounded"></span>
     </div>
     <div class="col-md-9">
-
         <div [ngSwitch]="isAuthenticated()">
             <div *ngSwitchCase="true">
                 <h1 class="display-4">Welcome, Madeleine!</h1>

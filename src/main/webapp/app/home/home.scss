@@ -56,3 +56,31 @@ Main page styles
     margin-bottom: 50px;
   }
 }
+
+.alert-container {
+  text-align: center;
+  width: 100%;
+}
+
+.alert {
+  display: none;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  width: 50%;
+}
+
+.alert-success {
+  background-color: #d1f2eb;
+  color: #0c6251;
+  border-color: #beece3;
+}
+
+.alert-danger {
+  color: #78281f;
+  background-color: #fadbd8;
+  border-color: #f8cdc8;
+}
