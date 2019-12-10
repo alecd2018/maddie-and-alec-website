@@ -84,8 +84,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.pollPokes = setInterval(() => {
       this.timeToHeart = this.updateTimes(this.currPoke.heartTime, 10, 'heart');
-      this.timeToMail = this.updateTimes(this.currPoke.mailTime, 15, 'mail');
-      this.timeToMassage = this.updateTimes(this.currPoke.massageTime, 60, 'massage');
+      this.timeToMail = this.updateTimes(this.currPoke.mailTime, 60 * 60 * 24 * 30, 'mail'); // every 30 days
+      this.timeToMassage = this.updateTimes(this.currPoke.massageTime, 60 * 60 * 24 * 14, 'massage'); // every 14 days
     }, 500);
   }
 
