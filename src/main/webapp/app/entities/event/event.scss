@@ -1,0 +1,15 @@
+.axis path {
+  display: none;
+}
+
+.tick line {
+  display: none;
+}
+
+svg:hover {
+  cursor: grab;
+}
+
+svg:active {
+  cursor: grabbing;
+}

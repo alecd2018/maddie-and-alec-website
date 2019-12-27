@@ -35,6 +35,8 @@ export class PokeComponent implements OnInit, OnDestroy {
       .subscribe(
         (res: IPoke[]) => {
           this.pokes = res;
+          // eslint-disable-next-line no-console
+          console.log(this.pokes);
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );

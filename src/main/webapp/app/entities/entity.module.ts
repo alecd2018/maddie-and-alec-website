@@ -7,6 +7,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'poke',
         loadChildren: () => import('./poke/poke.module').then(m => m.AlecPokeModule)
+      },
+      {
+        path: 'event',
+        loadChildren: () => import('./event/event.module').then(m => m.AlecEventModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])
