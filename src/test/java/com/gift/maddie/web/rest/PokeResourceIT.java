@@ -27,6 +27,8 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.gift.maddie.service.MailService;
+
 /**
  * Integration tests for the {@link PokeResource} REST controller.
  */
@@ -60,6 +62,9 @@ public class PokeResourceIT {
     @Autowired
     private Validator validator;
 
+    @Autowired
+    private MailService mailService;
+
     private MockMvc restPokeMockMvc;
 
     private Poke poke;
@@ -67,7 +72,7 @@ public class PokeResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PokeResource pokeResource = new PokeResource(pokeRepository);
+        final PokeResource pokeResource = new PokeResource(pokeRepository, mailService);
         this.restPokeMockMvc = MockMvcBuilders.standaloneSetup(pokeResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -106,23 +106,35 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   pokeClick(pokeType) {
     const time = Date.now();
+    let pokeTypeMsg;
     if (pokeType === 'heart') {
       this.currPoke.heartTime = time.toString();
+      pokeTypeMsg = 'Bother';
       this.alertMessage = 'Alec has been notified that you want to bother him.';
     } else if (pokeType === 'mail') {
       this.currPoke.mailTime = time.toString();
+      pokeTypeMsg = 'Mail';
       this.alertMessage = 'Alec has been notified that you want mail.';
     } else {
       this.currPoke.massageTime = time.toString();
+      pokeTypeMsg = 'Massage';
       this.alertMessage = 'Alec has been notified that you want a massage.';
     }
 
-    this.homeService.update(this.currPoke).subscribe(
+    this.homeService.send(pokeTypeMsg).subscribe(
       res => {
         $('#poke-success')
           .fadeIn()
           .delay(3000)
           .fadeOut();
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
+
+    this.homeService.update(this.currPoke).subscribe(
+      res => {
+        // eslint-disable-next-line no-console
+        console.log('Success');
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );

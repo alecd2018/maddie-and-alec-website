@@ -18,6 +18,9 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import com.gift.maddie.service.MailService;
+import org.springframework.http.HttpStatus;
+
 /**
  * REST controller for managing {@link com.gift.maddie.domain.Poke}.
  */
@@ -33,9 +36,12 @@ public class PokeResource {
     private String applicationName;
 
     private final PokeRepository pokeRepository;
+    
+    private final MailService mailService;
 
-    public PokeResource(PokeRepository pokeRepository) {
+    public PokeResource(PokeRepository pokeRepository, MailService mailService) {
         this.pokeRepository = pokeRepository;
+        this.mailService = mailService;
     }
 
     /**
@@ -114,5 +120,28 @@ public class PokeResource {
         log.debug("REST request to delete Poke : {}", id);
         pokeRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+
+
+    /**
+     {@code POST /poke} : send a poke to Alec.
+     @param type the type of poke to be sent
+     @return confirmation that poke was sent
+      */
+    @PostMapping("/poke")
+    public ResponseEntity<String> sendPoke(@PathVariable String type){
+        switch (type){
+            case "Bother" : 
+                mailService.sendEmail("ald01845@gmail.com", "Poke from Maddie", "Maddie wants to bother you", false, false);
+                break;
+            case "Mail" :
+                mailService.sendEmail("ald01845@gmail.com", "Poke from Maddie", "Maddie wants mail", false, false);
+                break;
+            case "Massage" :
+                mailService.sendEmail("ald01845@gmail.com", "Poke from Maddie", "Maddie wants a massage", false, false);
+                break;
+        }
+        log.debug("HELLOOOOOOOOOOO\n\n\n", type);
+        return new ResponseEntity<>("Message Sent.", HttpStatus.OK);
     }
 }

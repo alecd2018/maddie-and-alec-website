@@ -31,4 +31,8 @@ export class Home {
     const options = createRequestOption(req);
     return this.http.get<IPoke[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
+
+  send(type: string): Observable<EntityResponseType> {
+    return this.http.post<IPoke>(SERVER_API_URL + 'api/poke', type, { observe: 'response' });
+  }
 }
