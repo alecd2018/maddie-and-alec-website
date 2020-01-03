@@ -58,16 +58,16 @@ spring:
   #   username:
   #   password:
   mail:
-    host: smtp.gmail.com
+    host: smtp.sendgrid.com
     port: 587
-    username: ald01845 #Replace this field with your Gmail username.
-    password: btxvsmsumaesxetq #Replace this field with your Gmail password/App password.
+    username: app152097357@heroku.com #Replace this field with your Gmail username.
+    password: szxnzpfw5938 #Replace this field with your Gmail password/App password.
     protocol: smtp
     tls: true
     properties.mail.smtp:
       auth: true
       starttls.enable: true
-      ssl.trust: smtp.gmail.com
+      ssl.trust: smtp.sendgrid.com
   thymeleaf:
     cache: true
 
@@ -116,7 +116,7 @@ jhipster:
       # security key (this key should be unique for your application, and kept secret)
       key: 418c79268a8e75eae567567da08926b527846d46f6bf26283f01c33f94ea8cdb159827210f0c63a4991e6829d0e54d9ccc3e
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: http://my-server-url-to-change # Modify according to your server's URL
+    base-url: http://heroku.com # Modify according to your server's URL
   metrics:
     logs: # Reports metrics in the logs
       enabled: false
