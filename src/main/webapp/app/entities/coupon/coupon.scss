@@ -1,0 +1,86 @@
+/* ==========================================================================
+Main page styles
+========================================================================== */
+
+.hipster {
+  display: inline-block;
+  width: 347px;
+  height: 497px;
+  background: url('../../../content/images/squirrel.png') no-repeat center top;
+  background-size: contain;
+}
+
+/* wait autoprefixer update to allow simple generation of high pixel density media query */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (-moz-min-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .hipster {
+    background: url('../../../content/images/squirrel.png') no-repeat center top;
+    background-size: contain;
+    max-height: 350px;
+  }
+}
+
+.btn-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px !important;
+}
+
+.btn-image {
+  filter: invert(100%);
+  max-width: 40px;
+}
+
+.lower {
+  padding-top: 10px;
+}
+
+.col-btn {
+  width: 16.66%;
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*='col-btn'] {
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  .bottom-row {
+    margin-bottom: 50px;
+  }
+}
+
+.alert-container {
+  text-align: center;
+  width: 100%;
+}
+
+.alert {
+  display: none;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  width: 50%;
+}
+
+.alert-success {
+  background-color: #d1f2eb;
+  color: #0c6251;
+  border-color: #beece3;
+}
+
+.alert-danger {
+  color: #78281f;
+  background-color: #fadbd8;
+  border-color: #f8cdc8;
+}

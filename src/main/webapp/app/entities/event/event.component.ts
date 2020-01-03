@@ -76,15 +76,49 @@ export class EventComponent implements OnInit, OnDestroy {
         .call(zoom.transform, d3.zoomIdentity);
     }
 
+    function getWidth(scale, d) {
+      const diff = scale(d.endDate) - scale(d.date);
+      if (diff === 0) {
+        return 10;
+      } else {
+        return diff;
+      }
+    }
+
+    function handleMouseOver() {
+      const event = d3.select(this);
+      event
+        .attr('opacity', 1)
+        .attr('stroke', 'black')
+        .attr('stroke-width', '1');
+
+      // svg.append("rect")
+      //   .attr('x', x)
+      //   .attr('y', y)
+      //   .attr('width', 200)
+      //   .attr('height', 50)
+      //   .attr('stroke', 'black')
+      //   .attr('stroke-width', '1')
+      //   .attr('fill', 'none')
+      //   .attr('class','eventDescRect');
+
+      // svg.append("text")
+      //   .attr('x', x+10)
+      //   .attr('y', y+40)
+      //   .text("Hello")
+      //   .attr('class','eventDesc');
+    }
+
+    function handleMouseOut() {
+      const event = d3.select(this);
+      event.attr('opacity', 0.6).attr('stroke', 'none');
+      // svg.select('.eventDescRect').remove();
+      // svg.select('.eventDesc').remove();
+    }
+
     const width = 1600;
     const height = 400;
-    const margin = { left: 45, right: 15, top: 15, bottom: 15 };
-
-    const svg = d3
-      .select('#area')
-      .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom);
+    const margin = { left: 65, right: 15, top: 15, bottom: 15 };
 
     // const parseTime = d3.timeParse('%m/%d/%y');
     const formatTime = d3.timeFormat('%m/%d/%y');
@@ -96,19 +130,27 @@ export class EventComponent implements OnInit, OnDestroy {
     let minDate = new Date('12/30/2099');
     let maxDate = new Date('01/01/1990');
     const eventData = [];
-    const travelData = [];
-    const livingData = [];
+    // const travelData = [];
+    // const livingData = [];
+    const eventTypes = [];
     rawData.forEach(event => {
+      const id = event['id'];
       const date = new Date(event['startDate']);
       const endDate = new Date(event['endDate']);
       const desc = event['description'];
       const type = event['type'];
-      if (type === 'event') {
-        eventData.push({ date, desc, type });
-      } else if (type === 'Travel') {
-        travelData.push({ date, endDate, desc, type });
-      } else {
-        livingData.push({ date, endDate, desc, type });
+      // if (type === 'event') {
+      //   eventData.push({ date, desc, type });
+      // } else if (type === 'Travel') {
+      //   travelData.push({ date, endDate, desc, type });
+      // } else {
+      //   livingData.push({ date, endDate, desc, type });
+      // }
+
+      eventData.push({ id, date, endDate, desc, type });
+
+      if (!eventTypes.includes(type)) {
+        eventTypes.push(type);
       }
 
       if (date < minDate) {
@@ -120,15 +162,8 @@ export class EventComponent implements OnInit, OnDestroy {
     });
 
     // eslint-disable-next-line no-console
-    console.log(travelData);
+    console.log(eventData);
 
-    svg
-      .append('defs')
-      .append('clipPath')
-      .attr('id', 'clip')
-      .append('rect')
-      .attr('width', width)
-      .attr('height', height);
     const xScale = d3
       .scaleLinear()
       .domain([minDate, maxDate])
@@ -136,110 +171,132 @@ export class EventComponent implements OnInit, OnDestroy {
 
     const yScale = d3
       .scalePoint()
-      .domain(['Living', 'Travel', 'Event'])
+      .domain(eventTypes)
       .range([height - 75, 75]);
-
-    const travelColor = d3.scaleOrdinal(d3.schemeCategory10);
-    const livingColor = d3.scaleOrdinal(d3.schemeCategory10);
 
     const xAxis = d3.axisBottom(xScale);
 
     const yAxis = d3.axisRight(yScale);
 
-    const view = svg
-      .append('g')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-      .attr('clip-path', 'url(#clip)');
+    const svg = d3
+      .select('#area')
+      .append('svg')
+      .attr('class', 'grabbable')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom);
 
     const gX = svg
       .append('g')
       .attr('class', 'axis axis--x')
       .attr('transform', 'translate(0,' + height + ')')
+      .style('path', 'display: none;')
       .call(xAxis.tickFormat(formatTime));
 
     svg
       .append('g')
       .attr('class', 'axis axis--y')
+      .attr('transform', 'translate(0,' + margin.top + ')')
       .call(yAxis);
-
-    const circles = view
-      .selectAll('.event')
-      .data(eventData)
-      .enter()
-      .append('circle')
-      .attr('class', 'event')
-      .attr('cx', d => xScale(d.date))
-      .attr('cy', d => yScale('Event'))
-      .attr('fill', '#2ca02c')
-      .attr('fill-opacity', 0.6)
-      .attr('r', 8);
-
-    const travel = view
-      .selectAll('.travel')
-      .data(travelData)
-      .enter()
-      .append('rect')
-      .attr('class', 'travel')
-      .attr('x', d => xScale(d.date))
-      .attr('y', d => yScale('Travel'))
-      .attr('width', d => xScale(d.endDate) - xScale(d.date))
-      .attr('height', 20)
-      .attr('fill', function(d, i) {
-        return travelColor(i);
-      })
-      .attr('fill-opacity', 0.6);
-
-    const living = view
-      .selectAll('.living')
-      .data(travelData)
-      .enter()
-      .append('rect')
-      .attr('class', 'living')
-      .attr('x', d => xScale(d.date))
-      .attr('y', d => yScale('Travel'))
-      .attr('width', d => xScale(d.endDate) - xScale(d.date))
-      .attr('height', 20)
-      .attr('fill', function(d, i) {
-        return livingColor(i);
-      })
-      .attr('fill-opacity', 0.6);
 
     const zoom = d3
       .zoom()
-      .scaleExtent([1, 20])
-      .translateExtent([[0, 0], [width, height]])
+      // .rescaleX(xScale)
+      // .rescaleY(yScale)
+      .scaleExtent([0, 10])
+      // .on("zoom", zoomFunc(xScale, xAxis, gX, d3.event.transform));
       .on('zoom', () => {
         gX.call(xAxis.scale(d3.event.transform.rescaleX(xScale)));
         // gY.call(yAxis.scale(d3.event.transform.rescaleY(y)));
 
         const newXScale = d3.event.transform.rescaleX(xScale);
-        circles.attr('cx', d => newXScale(d.date));
-        travel.attr('x', d => newXScale(d.date)).attr('width', d => newXScale(d.endDate) - newXScale(d.date));
-        living.attr('x', d => newXScale(d.date)).attr('width', d => newXScale(d.endDate) - newXScale(d.date));
+        // circles.attr('cx', d => newXScale(d.date));
+        d3.selectAll('.events')
+          .attr('x', d => newXScale(d.date))
+          .attr('width', d => getWidth(newXScale, d));
       });
 
-    // svg.call(zoom);
+    // svg.append("g")
+    // .attr('x', margin.left)
+    // .attr('y', margin.top)
+    // .attr('width', (width - margin.left))
+    // .attr('height', (height - margin.top))
+    // .attr('fill', 'none')
+    // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    svg.call(zoom);
+
+    const defs = svg.append('defs');
+    // defs
+    //   .append('clipPath')
+    //   .attr('id', 'clip')
+    //   .append('rect')
+    //   .attr('width', width)
+    //   .attr('height', height);
+
+    defs
+      .append('style')
+      .attr('id', 'styles')
+      .attr('type', 'text/css');
+    const div = document.getElementById('styles');
+
+    div.innerHTML +=
+      '.axis path {display: none;}\
+                      .tick line {display: none;}\
+                      .grabbable {cursor: grab;}\
+                      .grabbable:active {cursor: grabbing;}\
+                      .tick text {\
+                        font-size:1.6em;\
+                      }\
+                      .events:hover {\
+                        cursor: pointer;\
+                      }';
+
+    const eventColor = d3.scaleOrdinal(d3.schemeCategory10);
+    // const livingColor = d3.scaleOrdinal(d3.schemeCategory10);
+
     svg
+      .append('clipPath')
+      .attr('id', 'clip')
       .append('rect')
+      .attr('x', 0)
+      .attr('y', 0)
       .attr('width', width)
-      .attr('height', height)
-      .style('fill', 'none')
-      .style('pointer-events', 'all')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-      .call(zoom);
+      .attr('height', height);
+
+    const chartBody = svg
+      .append('g')
+      .attr('clip-path', 'url(#clip)')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+    chartBody
+      .selectAll('.events')
+      .data(eventData)
+      .enter()
+      .append('rect')
+      .attr('class', 'events')
+      .attr('x', d => xScale(d.date))
+      .attr('y', d => yScale(d.type))
+      .attr('width', d => getWidth(xScale, d))
+      .attr('height', 20)
+      .attr('fill', function(d, i) {
+        return eventColor(eventTypes.indexOf(d.type));
+      })
+      .attr('fill-opacity', 0.6)
+      .attr('pointer-events', 'all')
+      .on('mouseover', handleMouseOver)
+      .on('mouseout', handleMouseOut)
+      .on('click', d => {
+        const elmnt = document.getElementById('event_' + d.id);
+        elmnt.scrollIntoView({ behavior: 'smooth' });
+        $('#event_' + d.id)
+          .parent()
+          .addClass('highlighted');
+        setTimeout(function() {
+          $('#event_' + d.id)
+            .parent()
+            .removeClass('highlighted');
+        }, 2000);
+      });
 
     d3.select('button').on('click', resetted(svg, zoom));
-
-    // var startDate = new Date("08/20/17");
-    // var startDateRect = svg.append("rect")
-    //     .attr("width", "3")
-    //     .attr("height", height)
-    //     .attr("x", xScale(startDate))
-    //     .attr("y", 0)
-    //     .attr('fill', 'blue');
-
-    // }
-
-    // requestData();
   }
 }

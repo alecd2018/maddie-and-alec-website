@@ -8,7 +8,7 @@ export const HOME_ROUTE: Route = {
   component: HomeComponent,
   data: {
     authorities: ['ROLE_USER'],
-    pageTitle: "Maddie's Coupons"
+    pageTitle: 'Maddie and Alec'
   },
   canActivate: [UserRouteAccessService]
 };

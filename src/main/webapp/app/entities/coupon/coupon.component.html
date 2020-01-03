@@ -1,0 +1,48 @@
+<div class='alert-container'>
+    <div id="poke-success" class="alert alert-success" role="alert">
+        Success! {{alertMessage}}
+    </div>
+    <div id="poke-failure" class="alert alert-danger" role="alert">
+        Failed to send Alec an alert.
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <span class="hipster img-fluid rounded"></span>
+    </div>
+    <div class="col-md-9">
+        <div [ngSwitch]="isAuthenticated()">
+            <div *ngSwitchCase="true">
+                <h2 id="page-heading">
+                    Coupons!
+                </h2>
+                <p class="lead">
+                    You can see and use your coupons here. But use them sparingly! There's a time limit on each, so that you can't use them too often ;)<br>
+                    Once you use one, a timer will start counting down to when you can use it again. Enjoy!
+                </p>
+                <div class="row bottom-row">
+                    <div class="col-btn">
+                        <button id="heartButton" class="btn btn-danger btn-circle" (click)="pokeClick('heart')"><img class="btn-image lower" src="../../../content/images/poke.png"/></button>
+                        <p id="heartTimer" class="font-weight-bold">Reactivates in: {{this.timeToHeart}}</p>
+                        <p class="font-weight-bold">Bother</p>
+                        <p>Annoy Alec as much as you want with this 10 second coupon!</p>
+                    </div>
+                    <div class="col-btn">
+                        <button id="mailButton" class="btn btn-success btn-circle" (click)="pokeClick('mail')"><img class="btn-image" src="../../../content/images/email.png"/></button>
+                        <p id="mailTimer" class="font-weight-bold">Reactivates in: {{this.timeToMail}}</p>
+                        <p class="font-weight-bold">Mail</p>
+                        <p>Feeling postally neglected? With this coupon, you can ask for mail once a month!</p>
+                    </div>
+                    <div class="col-btn">
+                        <button id="massageButton" class="btn btn-info btn-circle" (click)="pokeClick('massage')"><img class="btn-image" src="../../../content/images/massage.png"/></button>
+                        <p id="massageTimer" class="font-weight-bold">Reactivates in: {{this.timeToMassage}}</p>
+                        <p class="font-weight-bold">Massage</p>
+                        <p>Getting swole? Friggin' yolked? Sooth those muscles with a massage every two weeks!</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

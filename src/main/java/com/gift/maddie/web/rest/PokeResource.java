@@ -129,7 +129,7 @@ public class PokeResource {
      @return confirmation that poke was sent
       */
     @PostMapping("/poke")
-    public ResponseEntity<String> sendPoke(@PathVariable String type){
+    public void sendPoke(@RequestBody String type){
         switch (type){
             case "Bother" : 
                 mailService.sendEmail("ald01845@gmail.com", "Poke from Maddie", "Maddie wants to bother you", false, false);
@@ -141,7 +141,6 @@ public class PokeResource {
                 mailService.sendEmail("ald01845@gmail.com", "Poke from Maddie", "Maddie wants a massage", false, false);
                 break;
         }
-        log.debug("HELLOOOOOOOOOOO\n\n\n", type);
-        return new ResponseEntity<>("Message Sent.", HttpStatus.OK);
+        // return "Message sent.";
     }
 }

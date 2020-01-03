@@ -1,4 +1,8 @@
-<div>
+<style>
+.axis {
+    display: none;
+}
+</style><div>
     <h2 id="page-heading">
         Relationship Timeline
     </h2>
@@ -33,7 +37,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let event of events ;trackBy: trackId">
-                <td><a [routerLink]="['/event', event.id, 'view' ]">{{event.id}}</a></td>
+                <td id='event_{{event.id}}'><a [routerLink]="['/event', event.id, 'view' ]">{{event.id}}</a></td>
                 <td>{{event.startDate}}</td>
                 <td>{{event.endDate}}</td>
                 <td>{{event.description}}</td>

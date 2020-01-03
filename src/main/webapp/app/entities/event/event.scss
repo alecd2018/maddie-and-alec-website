@@ -6,10 +6,6 @@
   display: none;
 }
 
-svg:hover {
-  cursor: grab;
-}
-
-svg:active {
-  cursor: grabbing;
+.highlighted {
+  border: 2px solid black;
 }
