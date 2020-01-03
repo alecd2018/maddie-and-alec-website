@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EventResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Alec</a> &gt; <a href="index.source.html" class="el_package">com.gift.maddie.web.rest</a> &gt; <span class="el_source">EventResource.java</span></div><h1>EventResource.java</h1><pre class="source lang-java linenums">package com.gift.maddie.web.rest;
+
+import com.gift.maddie.domain.Event;
+import com.gift.maddie.repository.EventRepository;
+import com.gift.maddie.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * REST controller for managing {@link com.gift.maddie.domain.Event}.
+ */
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class EventResource {
+
+<span class="nc" id="L28">    private final Logger log = LoggerFactory.getLogger(EventResource.class);</span>
+
+    private static final String ENTITY_NAME = &quot;event&quot;;
+
+    @Value(&quot;${jhipster.clientApp.name}&quot;)
+    private String applicationName;
+
+    private final EventRepository eventRepository;
+
+<span class="nc" id="L37">    public EventResource(EventRepository eventRepository) {</span>
+<span class="nc" id="L38">        this.eventRepository = eventRepository;</span>
+<span class="nc" id="L39">    }</span>
+
+    /**
+     * {@code POST  /events} : Create a new event.
+     *
+     * @param event the event to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new event, or with status {@code 400 (Bad Request)} if the event has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping(&quot;/events&quot;)
+    public ResponseEntity&lt;Event&gt; createEvent(@RequestBody Event event) throws URISyntaxException {
+<span class="nc" id="L50">        log.debug(&quot;REST request to save Event : {}&quot;, event);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (event.getId() != null) {</span>
+<span class="nc" id="L52">            throw new BadRequestAlertException(&quot;A new event cannot already have an ID&quot;, ENTITY_NAME, &quot;idexists&quot;);</span>
+        }
+<span class="nc" id="L54">        Event result = eventRepository.save(event);</span>
+<span class="nc" id="L55">        return ResponseEntity.created(new URI(&quot;/api/events/&quot; + result.getId()))</span>
+<span class="nc" id="L56">            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))</span>
+<span class="nc" id="L57">            .body(result);</span>
+    }
+
+    /**
+     * {@code PUT  /events} : Updates an existing event.
+     *
+     * @param event the event to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated event,
+     * or with status {@code 400 (Bad Request)} if the event is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the event couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PutMapping(&quot;/events&quot;)
+    public ResponseEntity&lt;Event&gt; updateEvent(@RequestBody Event event) throws URISyntaxException {
+<span class="nc" id="L71">        log.debug(&quot;REST request to update Event : {}&quot;, event);</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (event.getId() == null) {</span>
+<span class="nc" id="L73">            throw new BadRequestAlertException(&quot;Invalid id&quot;, ENTITY_NAME, &quot;idnull&quot;);</span>
+        }
+<span class="nc" id="L75">        Event result = eventRepository.save(event);</span>
+<span class="nc" id="L76">        return ResponseEntity.ok()</span>
+<span class="nc" id="L77">            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, event.getId().toString()))</span>
+<span class="nc" id="L78">            .body(result);</span>
+    }
+
+    /**
+     * {@code GET  /events} : get all the events.
+     *
+
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of events in body.
+     */
+    @GetMapping(&quot;/events&quot;)
+    public List&lt;Event&gt; getAllEvents() {
+<span class="nc" id="L89">        log.debug(&quot;REST request to get all Events&quot;);</span>
+<span class="nc" id="L90">        return eventRepository.findAll();</span>
+    }
+
+    /**
+     * {@code GET  /events/:id} : get the &quot;id&quot; event.
+     *
+     * @param id the id of the event to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the event, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping(&quot;/events/{id}&quot;)
+    public ResponseEntity&lt;Event&gt; getEvent(@PathVariable Long id) {
+<span class="nc" id="L101">        log.debug(&quot;REST request to get Event : {}&quot;, id);</span>
+<span class="nc" id="L102">        Optional&lt;Event&gt; event = eventRepository.findById(id);</span>
+<span class="nc" id="L103">        return ResponseUtil.wrapOrNotFound(event);</span>
+    }
+
+    /**
+     * {@code DELETE  /events/:id} : delete the &quot;id&quot; event.
+     *
+     * @param id the id of the event to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping(&quot;/events/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteEvent(@PathVariable Long id) {
+<span class="nc" id="L114">        log.debug(&quot;REST request to delete Event : {}&quot;, id);</span>
+<span class="nc" id="L115">        eventRepository.deleteById(id);</span>
+<span class="nc" id="L116">        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
