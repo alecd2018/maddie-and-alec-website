@@ -25,7 +25,7 @@ public class Poke implements Serializable {
     private String mailTime;
 
     @Column(name = "massage_time")
-    private String massageTime;
+    private String vacaTime;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -62,17 +62,17 @@ public class Poke implements Serializable {
         this.mailTime = mailTime;
     }
 
-    public String getMassageTime() {
-        return massageTime;
+    public String getVacaTime() {
+        return vacaTime;
     }
 
-    public Poke massageTime(String massageTime) {
-        this.massageTime = massageTime;
+    public Poke vacaTime(String vacaTime) {
+        this.vacaTime = vacaTime;
         return this;
     }
 
-    public void setMassageTime(String massageTime) {
-        this.massageTime = massageTime;
+    public void setVacaTime(String vacaTime) {
+        this.vacaTime = vacaTime;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -98,7 +98,7 @@ public class Poke implements Serializable {
             "id=" + getId() +
             ", heartTime='" + getHeartTime() + "'" +
             ", mailTime='" + getMailTime() + "'" +
-            ", massageTime='" + getMassageTime() + "'" +
+            ", vacaTime='" + getVacaTime() + "'" +
             "}";
     }
 }

@@ -58,7 +58,7 @@ describe('Service Tests', () => {
           {
             heartTime: 'BBBBBB',
             mailTime: 'BBBBBB',
-            massageTime: 'BBBBBB'
+            vacaTime: 'BBBBBB'
           },
           elemDefault
         );
@@ -78,7 +78,7 @@ describe('Service Tests', () => {
           {
             heartTime: 'BBBBBB',
             mailTime: 'BBBBBB',
-            massageTime: 'BBBBBB'
+            vacaTime: 'BBBBBB'
           },
           elemDefault
         );

@@ -12,7 +12,7 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "massageTime",
+            "fieldName": "vacaTime",
             "fieldType": "String"
         }
     ],

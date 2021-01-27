@@ -35,7 +35,7 @@
     "otherModules": [],
     "enableTranslation": false,
     "blueprints": [],
-    "herokuAppName": "maddie-and-alec",
+    "herokuAppName": "dean-family",
     "herokuDeployType": "git"
   }
 }

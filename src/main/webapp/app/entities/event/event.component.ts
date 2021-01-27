@@ -98,9 +98,9 @@ export class EventComponent implements OnInit, OnDestroy {
       event.attr('opacity', 0.6).attr('stroke', 'none');
     }
 
-    const width = 1600;
+    const width = 900;
     const height = 400;
-    const margin = { left: 65, right: 15, top: 15, bottom: 15 };
+    const margin = { left: 115, right: 25, top: 15, bottom: 15 };
 
     const formatTime = d3.timeFormat('%m/%d/%y');
 

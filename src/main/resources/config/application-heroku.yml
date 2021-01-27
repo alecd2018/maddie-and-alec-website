@@ -12,7 +12,7 @@
 
 eureka:
   instance:
-    hostname: maddie-and-alec.herokuapp.com
+    hostname: dean-family.herokuapp.com
     non-secure-port: 80
     prefer-ip-address: false
 

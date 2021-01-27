@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   success: boolean;
   timeToHeart: any;
   timeToMail: any;
-  timeToMassage: any;
+  timeToVaca: any;
   hideHeartTime: boolean;
   pollPokes: any;
   alertMessage: string;

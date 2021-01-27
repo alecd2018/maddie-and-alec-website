@@ -41,8 +41,8 @@ public class PokeResourceIT {
     private static final String DEFAULT_MAIL_TIME = "AAAAAAAAAA";
     private static final String UPDATED_MAIL_TIME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_MASSAGE_TIME = "AAAAAAAAAA";
-    private static final String UPDATED_MASSAGE_TIME = "BBBBBBBBBB";
+    private static final String DEFAULT_VACA_TIME = "AAAAAAAAAA";
+    private static final String UPDATED_VACA_TIME = "BBBBBBBBBB";
 
     @Autowired
     private PokeRepository pokeRepository;
@@ -91,7 +91,7 @@ public class PokeResourceIT {
         Poke poke = new Poke()
             .heartTime(DEFAULT_HEART_TIME)
             .mailTime(DEFAULT_MAIL_TIME)
-            .massageTime(DEFAULT_MASSAGE_TIME);
+            .vacaTime(DEFAULT_VACA_TIME);
         return poke;
     }
     /**
@@ -104,7 +104,7 @@ public class PokeResourceIT {
         Poke poke = new Poke()
             .heartTime(UPDATED_HEART_TIME)
             .mailTime(UPDATED_MAIL_TIME)
-            .massageTime(UPDATED_MASSAGE_TIME);
+            .vacaTime(UPDATED_VACA_TIME);
         return poke;
     }
 
@@ -130,7 +130,7 @@ public class PokeResourceIT {
         Poke testPoke = pokeList.get(pokeList.size() - 1);
         assertThat(testPoke.getHeartTime()).isEqualTo(DEFAULT_HEART_TIME);
         assertThat(testPoke.getMailTime()).isEqualTo(DEFAULT_MAIL_TIME);
-        assertThat(testPoke.getMassageTime()).isEqualTo(DEFAULT_MASSAGE_TIME);
+        assertThat(testPoke.getVacaTime()).isEqualTo(DEFAULT_VACA_TIME);
     }
 
     @Test
@@ -166,7 +166,7 @@ public class PokeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(poke.getId().intValue())))
             .andExpect(jsonPath("$.[*].heartTime").value(hasItem(DEFAULT_HEART_TIME.toString())))
             .andExpect(jsonPath("$.[*].mailTime").value(hasItem(DEFAULT_MAIL_TIME.toString())))
-            .andExpect(jsonPath("$.[*].massageTime").value(hasItem(DEFAULT_MASSAGE_TIME.toString())));
+            .andExpect(jsonPath("$.[*].vacaTime").value(hasItem(DEFAULT_VACA_TIME.toString())));
     }
     
     @Test
@@ -182,7 +182,7 @@ public class PokeResourceIT {
             .andExpect(jsonPath("$.id").value(poke.getId().intValue()))
             .andExpect(jsonPath("$.heartTime").value(DEFAULT_HEART_TIME.toString()))
             .andExpect(jsonPath("$.mailTime").value(DEFAULT_MAIL_TIME.toString()))
-            .andExpect(jsonPath("$.massageTime").value(DEFAULT_MASSAGE_TIME.toString()));
+            .andExpect(jsonPath("$.vacaTime").value(DEFAULT_VACA_TIME.toString()));
     }
 
     @Test
@@ -208,7 +208,7 @@ public class PokeResourceIT {
         updatedPoke
             .heartTime(UPDATED_HEART_TIME)
             .mailTime(UPDATED_MAIL_TIME)
-            .massageTime(UPDATED_MASSAGE_TIME);
+            .vacaTime(UPDATED_VACA_TIME);
 
         restPokeMockMvc.perform(put("/api/pokes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -221,7 +221,7 @@ public class PokeResourceIT {
         Poke testPoke = pokeList.get(pokeList.size() - 1);
         assertThat(testPoke.getHeartTime()).isEqualTo(UPDATED_HEART_TIME);
         assertThat(testPoke.getMailTime()).isEqualTo(UPDATED_MAIL_TIME);
-        assertThat(testPoke.getMassageTime()).isEqualTo(UPDATED_MASSAGE_TIME);
+        assertThat(testPoke.getVacaTime()).isEqualTo(UPDATED_VACA_TIME);
     }
 
     @Test
