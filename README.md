@@ -45,6 +45,10 @@ Before you can build this project, you must install and configure the following 
 
 3. [docker-compose][]: I used docker-compose to run the PostgreSQL database, since JHipster provided the functionality already built in.
 
+## JHipster Documentation
+
+#### The following documentation is taken directly from JHipster's default README.md
+
 After installing Node, you should be able to run the following command to install development tools.
 You will only need to run this command when dependencies change in [package.json](package.json).
 
@@ -64,9 +68,9 @@ Add the `help` flag on any command to see how you can use it. For example, `npm 
 
 The `npm run` command will list all of the scripts available to run for this project.
 
-## Building for production
+### Building for production
 
-### Packaging as jar
+#### Packaging as jar
 
 To build the final jar and optimize the alec application for production, run:
 
@@ -81,19 +85,19 @@ Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
 Refer to [Using JHipster in production][] for more details.
 
-### Packaging as war
+#### Packaging as war
 
 To package your application as a war in order to deploy it to an application server, run:
 
     ./mvnw -Pprod,war clean verify
 
-## Testing
+### Testing
 
 To launch your application's tests, run:
 
     ./mvnw verify
 
-### Client tests
+#### Client tests
 
 Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
 
@@ -101,7 +105,7 @@ Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in 
 
 For more information, refer to the [Running tests page][].
 
-### Code quality
+#### Code quality
 
 Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
 
@@ -127,7 +131,7 @@ or
 
 For more information, refer to the [Code quality page][].
 
-## Using Docker to simplify development (optional)
+### Using Docker to simplify development (optional)
 
 You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
 
