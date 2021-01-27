@@ -13,9 +13,9 @@
     <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
-    <include file="/app/src/main/resources/config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="/app/src/main/resources/config/liquibase/changelog/20191028185239_added_entity_Poke.xml" relativeToChangelogFile="false"/>
-    <include file="/app/src/main/resources/config/liquibase/changelog/20191226191906_added_entity_Event.xml" relativeToChangelogFile="false"/>
+    <include file="changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/20191028185239_added_entity_Poke.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/20191226191906_added_entity_Event.xml" relativeToChangelogFile="true"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
