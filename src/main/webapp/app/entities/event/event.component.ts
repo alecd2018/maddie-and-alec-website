@@ -91,47 +91,24 @@ export class EventComponent implements OnInit, OnDestroy {
         .attr('opacity', 1)
         .attr('stroke', 'black')
         .attr('stroke-width', '1');
-
-      // svg.append("rect")
-      //   .attr('x', x)
-      //   .attr('y', y)
-      //   .attr('width', 200)
-      //   .attr('height', 50)
-      //   .attr('stroke', 'black')
-      //   .attr('stroke-width', '1')
-      //   .attr('fill', 'none')
-      //   .attr('class','eventDescRect');
-
-      // svg.append("text")
-      //   .attr('x', x+10)
-      //   .attr('y', y+40)
-      //   .text("Hello")
-      //   .attr('class','eventDesc');
     }
 
     function handleMouseOut() {
       const event = d3.select(this);
       event.attr('opacity', 0.6).attr('stroke', 'none');
-      // svg.select('.eventDescRect').remove();
-      // svg.select('.eventDesc').remove();
     }
 
     const width = 1600;
     const height = 400;
     const margin = { left: 65, right: 15, top: 15, bottom: 15 };
 
-    // const parseTime = d3.timeParse('%m/%d/%y');
     const formatTime = d3.timeFormat('%m/%d/%y');
 
     const rawData = this.events;
-    // eslint-disable-next-line no-console
-    console.log(rawData);
 
     let minDate = new Date('12/30/2099');
     let maxDate = new Date('01/01/1990');
     const eventData = [];
-    // const travelData = [];
-    // const livingData = [];
     const eventTypes = [];
     rawData.forEach(event => {
       const id = event['id'];
@@ -139,13 +116,6 @@ export class EventComponent implements OnInit, OnDestroy {
       const endDate = new Date(event['endDate']);
       const desc = event['description'];
       const type = event['type'];
-      // if (type === 'event') {
-      //   eventData.push({ date, desc, type });
-      // } else if (type === 'Travel') {
-      //   travelData.push({ date, endDate, desc, type });
-      // } else {
-      //   livingData.push({ date, endDate, desc, type });
-      // }
 
       eventData.push({ id, date, endDate, desc, type });
 
@@ -160,9 +130,6 @@ export class EventComponent implements OnInit, OnDestroy {
         maxDate = date;
       }
     });
-
-    // eslint-disable-next-line no-console
-    console.log(eventData);
 
     const xScale = d3
       .scaleLinear()
@@ -200,37 +167,19 @@ export class EventComponent implements OnInit, OnDestroy {
 
     const zoom = d3
       .zoom()
-      // .rescaleX(xScale)
-      // .rescaleY(yScale)
       .scaleExtent([0, 10])
-      // .on("zoom", zoomFunc(xScale, xAxis, gX, d3.event.transform));
       .on('zoom', () => {
         gX.call(xAxis.scale(d3.event.transform.rescaleX(xScale)));
-        // gY.call(yAxis.scale(d3.event.transform.rescaleY(y)));
 
         const newXScale = d3.event.transform.rescaleX(xScale);
-        // circles.attr('cx', d => newXScale(d.date));
         d3.selectAll('.events')
           .attr('x', d => newXScale(d.date))
           .attr('width', d => getWidth(newXScale, d));
       });
 
-    // svg.append("g")
-    // .attr('x', margin.left)
-    // .attr('y', margin.top)
-    // .attr('width', (width - margin.left))
-    // .attr('height', (height - margin.top))
-    // .attr('fill', 'none')
-    // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     svg.call(zoom);
 
     const defs = svg.append('defs');
-    // defs
-    //   .append('clipPath')
-    //   .attr('id', 'clip')
-    //   .append('rect')
-    //   .attr('width', width)
-    //   .attr('height', height);
 
     defs
       .append('style')
@@ -251,7 +200,6 @@ export class EventComponent implements OnInit, OnDestroy {
                       }';
 
     const eventColor = d3.scaleOrdinal(d3.schemeCategory10);
-    // const livingColor = d3.scaleOrdinal(d3.schemeCategory10);
 
     svg
       .append('clipPath')

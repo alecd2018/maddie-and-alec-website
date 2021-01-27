@@ -13,14 +13,21 @@
     <div class="col-md-9">
         <div [ngSwitch]="isAuthenticated()">
             <div *ngSwitchCase="true">
-                <h1 class="display-4">Welcome, Madeleine!</h1>
-                <h3>This is our little website.</h3>
+                <h1 class="display-4">Welcome!</h1>
+                <h3>This is the Dean Family website.</h3>
                 <p class="lead">
-                    Here, you'll be able to do a few things important for the continuation of you and Alec's relationship. Check out the "My Apps"
-                    dropdown menu to see what you can do!<br><br>
-                    Also, an important part of any relationship is communication, so in order for this website to be useful and promote love betwen you and Alec,
-                    make sure to give feedback/recommendations so that we can improve our little site :)
+                    I've put together two web apps for us to keep in touch with eachother and follow some of our best family memories.
+                    If you take a look at the <strong>My Apps</strong> dropdown above, you'll see two different apps:
                 </p>
+                <ul>
+                    <li>
+                        <a class="alert-link" href="/coupon">The Coupon App</h6>
+                    </li>
+                    <li>
+                        <a class="alert-link" href="/event">The Timeline App</h6>
+                    </li>
+                </ul>
+                <p class="lead">Click on them to check them out!</p>
             </div>
 
             <div *ngSwitchCase="false">
