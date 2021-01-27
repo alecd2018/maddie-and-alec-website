@@ -1,4 +1,36 @@
-# alec
+# Web Apps using JHipster
+
+## Introduction
+
+Jhipster is an open-soruce Yeoman generator that simplifies the creation of full stack web services and microservices. Since it is based on many industry standards for web development, I decided to experiment with it and make my own project in the hope of learning some of the best practices and tools for web development.
+
+The following application is what I created.
+
+## Technology Stack
+
+When generating a JHipster project, there are many different cutting edge technology choices to select from. Below is a list of the technologies used for this specific project.
+
+### Frontend
+
+- Framework: Angular
+- Build System: Webpack
+- CSS Framework: Twitter Bootstrap
+
+### Backend
+
+- Framework: Sprint Boot 11
+- Security Framework: Sprint Security
+- Production Database: PostgreSQL
+- Development Database: Liquibase
+- Build System: Maven
+- Deployment Framework: Heroku
+
+## Usage
+
+Go to [https://www.dean-family.herokuapp.com](http://www.dean-family.herokuapp.com) and log in with the following credentials:
+
+- user name: user
+- password: user
 
 This application was generated using JHipster 6.3.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.3.1](https://www.jhipster.tech/documentation-archive/v6.3.1).
 
@@ -8,6 +40,14 @@ Before you can build this project, you must install and configure the following 
 
 1. [Node.js][]: We use Node to run a development web server and build the project.
    Depending on your system, you can install Node either from source or as a pre-packaged bundle.
+
+2. [Java 11][]: The back end of the application is based on Sprint Boot 11, which requires Java.
+
+3. [docker-compose][]: I used docker-compose to run the PostgreSQL database, since JHipster provided the functionality already built in.
+
+## JHipster Documentation
+
+#### The following documentation is taken directly from JHipster's default README.md
 
 After installing Node, you should be able to run the following command to install development tools.
 You will only need to run this command when dependencies change in [package.json](package.json).
@@ -28,68 +68,9 @@ Add the `help` flag on any command to see how you can use it. For example, `npm 
 
 The `npm run` command will list all of the scripts available to run for this project.
 
-### PWA Support
+### Building for production
 
-JHipster ships with PWA (Progressive Web App) support, and it's disabled by default. One of the main components of a PWA is a service worker.
-
-The service worker initialization code is commented out by default. To enable it, uncomment the following code in `src/main/webapp/index.html`:
-
-```html
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js').then(function() {
-      console.log('Service Worker Registered');
-    });
-  }
-</script>
-```
-
-Note: [Workbox](https://developers.google.com/web/tools/workbox/) powers JHipster's service worker. It dynamically generates the `service-worker.js` file.
-
-### Managing dependencies
-
-For example, to add [Leaflet][] library as a runtime dependency of your application, you would run following command:
-
-    npm install --save --save-exact leaflet
-
-To benefit from TypeScript type definitions from [DefinitelyTyped][] repository in development, you would run following command:
-
-    npm install --save-dev --save-exact @types/leaflet
-
-Then you would import the JS and CSS files specified in library's installation instructions so that [Webpack][] knows about them:
-Edit [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) file:
-
-```
-import 'leaflet/dist/leaflet.js';
-```
-
-Edit [src/main/webapp/content/css/vendor.css](src/main/webapp/content/css/vendor.css) file:
-
-```
-@import '~leaflet/dist/leaflet.css';
-```
-
-Note: There are still a few other things remaining to do for Leaflet that we won't detail here.
-
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
-
-### Using Angular CLI
-
-You can also use [Angular CLI][] to generate some custom client code.
-
-For example, the following command:
-
-    ng generate component my-component
-
-will generate few files:
-
-    create src/main/webapp/app/my-component/my-component.component.html
-    create src/main/webapp/app/my-component/my-component.component.ts
-    update src/main/webapp/app/app.module.ts
-
-## Building for production
-
-### Packaging as jar
+#### Packaging as jar
 
 To build the final jar and optimize the alec application for production, run:
 
@@ -104,19 +85,19 @@ Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
 Refer to [Using JHipster in production][] for more details.
 
-### Packaging as war
+#### Packaging as war
 
 To package your application as a war in order to deploy it to an application server, run:
 
     ./mvnw -Pprod,war clean verify
 
-## Testing
+### Testing
 
 To launch your application's tests, run:
 
     ./mvnw verify
 
-### Client tests
+#### Client tests
 
 Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
 
@@ -124,7 +105,7 @@ Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in 
 
 For more information, refer to the [Running tests page][].
 
-### Code quality
+#### Code quality
 
 Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
 
@@ -150,7 +131,7 @@ or
 
 For more information, refer to the [Code quality page][].
 
-## Using Docker to simplify development (optional)
+### Using Docker to simplify development (optional)
 
 You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
 
@@ -172,26 +153,3 @@ Then run:
     docker-compose -f src/main/docker/app.yml up -d
 
 For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
-
-## Continuous Integration (optional)
-
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
-
-[jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 6.3.1 archive]: https://www.jhipster.tech/documentation-archive/v6.3.1
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.3.1/development/
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.3.1/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.3.1/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v6.3.1/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v6.3.1/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.3.1/setting-up-ci/
-[node.js]: https://nodejs.org/
-[yarn]: https://yarnpkg.org/
-[webpack]: https://webpack.github.io/
-[angular cli]: https://cli.angular.io/
-[browsersync]: https://www.browsersync.io/
-[jest]: https://facebook.github.io/jest/
-[jasmine]: https://jasmine.github.io/2.0/introduction.html
-[protractor]: https://angular.github.io/protractor/
-[leaflet]: https://leafletjs.com/
-[definitelytyped]: https://definitelytyped.org/

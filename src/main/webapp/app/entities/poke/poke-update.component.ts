@@ -19,7 +19,7 @@ export class PokeUpdateComponent implements OnInit {
     id: [],
     heartTime: [],
     mailTime: [],
-    massageTime: []
+    vacaTime: []
   });
 
   constructor(protected pokeService: PokeService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -36,7 +36,7 @@ export class PokeUpdateComponent implements OnInit {
       id: poke.id,
       heartTime: poke.heartTime,
       mailTime: poke.mailTime,
-      massageTime: poke.massageTime
+      vacaTime: poke.vacaTime
     });
   }
 
@@ -60,7 +60,7 @@ export class PokeUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       heartTime: this.editForm.get(['heartTime']).value,
       mailTime: this.editForm.get(['mailTime']).value,
-      massageTime: this.editForm.get(['massageTime']).value
+      vacaTime: this.editForm.get(['vacaTime']).value
     };
   }
 

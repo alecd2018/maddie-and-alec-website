@@ -132,13 +132,13 @@ public class PokeResource {
     public void sendPoke(@RequestBody String type){
         switch (type){
             case "Bother" : 
-                mailService.sendEmail("ald01845@gmail.com", "Poke from Maddie", "Maddie wants to bother you", false, false);
+                mailService.sendEmail("ald01845@gmail.com", "Poke from Family", "Somebody wants to bother you", false, false);
                 break;
             case "Mail" :
-                mailService.sendEmail("ald01845@gmail.com", "Poke from Maddie", "Maddie wants mail", false, false);
+                mailService.sendEmail("ald01845@gmail.com", "Poke from Family", "Somebody wants mail", false, false);
                 break;
-            case "Massage" :
-                mailService.sendEmail("ald01845@gmail.com", "Poke from Maddie", "Maddie wants a massage", false, false);
+            case "Vacation" :
+                mailService.sendEmail("ald01845@gmail.com", "Poke from Family", "Somebody wants a vacation", false, false);
                 break;
         }
         // return "Message sent.";

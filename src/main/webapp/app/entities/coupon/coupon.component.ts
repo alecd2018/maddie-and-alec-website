@@ -25,7 +25,7 @@ export class CouponComponent implements OnInit, OnDestroy {
   success: boolean;
   timeToHeart: any;
   timeToMail: any;
-  timeToMassage: any;
+  timeToVaca: any;
   hideHeartTime: boolean;
   pollPokes: any;
   alertMessage: string;
@@ -48,8 +48,12 @@ export class CouponComponent implements OnInit, OnDestroy {
         (res: IPoke[]) => {
           this.pokes = res;
           this.currPoke = this.pokes[0];
+          // eslint-disable-next-line no-console
+          console.log(this.currPoke);
         },
-        (res: HttpErrorResponse) => this.onError(res.message)
+        (res: HttpErrorResponse) => {
+          this.onError(res.message);
+        }
       );
   }
 
@@ -75,25 +79,18 @@ export class CouponComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.accountService.identity().then(account => {
-    //   this.account = account;
-    // });
     this.loadAll();
 
     this.pollPokes = setInterval(() => {
       this.timeToHeart = this.updateTimes(this.currPoke.heartTime, 10, 'heart');
       this.timeToMail = this.updateTimes(this.currPoke.mailTime, 60 * 60 * 24 * 30, 'mail'); // every 30 days
-      this.timeToMassage = this.updateTimes(this.currPoke.massageTime, 60 * 60 * 24 * 14, 'massage'); // every 14 days
+      this.timeToVaca = this.updateTimes(this.currPoke.vacaTime, 60 * 60 * 24 * 120, 'vaca'); // every 4 months
     }, 500);
   }
 
   isAuthenticated() {
     return this.accountService.isAuthenticated();
   }
-
-  // login() {
-  //   this.modalRef = this.loginModalService.open();
-  // }
 
   ngOnDestroy() {
     if (this.authSubscription) {
@@ -114,9 +111,9 @@ export class CouponComponent implements OnInit, OnDestroy {
       pokeTypeMsg = 'Mail';
       this.alertMessage = 'Alec has been notified that you want mail.';
     } else {
-      this.currPoke.massageTime = time.toString();
-      pokeTypeMsg = 'Massage';
-      this.alertMessage = 'Alec has been notified that you want a massage.';
+      this.currPoke.vacaTime = time.toString();
+      pokeTypeMsg = 'Vaca';
+      this.alertMessage = 'Alec has been notified that you want a vacation.';
     }
 
     this.homeService.send(pokeTypeMsg).subscribe(
@@ -149,5 +146,7 @@ export class CouponComponent implements OnInit, OnDestroy {
       .delay(4000)
       .fadeOut();
     this.jhiAlertService.error(errorMessage, null, null);
+    // eslint-disable-next-line no-console
+    console.log(errorMessage);
   }
 }
