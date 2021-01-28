@@ -1,17 +1,17 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/alecdean/jhipster-family-webapps">
     <img src="images/logo.png" alt="Logo" width="70" height="80">
   </a>
 
-  <h3 align="center">project_title</h3>
+  <h3 align="center">JHipster WebApps</h3>
 
   <p align="center">
-    project_description
+    A experiment with JHipster to build some simple web apps and experiment with new technologies.
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Site</a>
+    <a href="https://dean-family.herokuapp.com">View Site</a>
   </p>
 </p>
 
