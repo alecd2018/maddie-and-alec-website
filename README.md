@@ -1,10 +1,48 @@
-# Web Apps using JHipster
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/github_username/repo_name">
+    <img src="images/logo.png" alt="Logo" width="70" height="80">
+  </a>
 
-## Introduction
+  <h3 align="center">project_title</h3>
 
-Jhipster is an open-soruce Yeoman generator that simplifies the creation of full stack web services and microservices. Since it is based on many industry standards for web development, I decided to experiment with it and make my own project in the hope of learning some of the best practices and tools for web development.
+  <p align="center">
+    project_description
+    <br />
+    <br />
+    <a href="https://github.com/github_username/repo_name">View Site</a>
+  </p>
+</p>
 
-The following application is what I created.
+- [About The Project](#about-the-project)
+- [Technology Stack](#technology-stack)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+- [Development](#development)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Acknowledgements](#acknowledgements)
+  <!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+![Product Name Screen Shot](images/site.png)
+
+Jhipster is an open-source Yeoman generator that simplifies the creation of full stack web services and microservices. Since it is based on many industry standards for web development, I decided to experiment with it and make my own project in the hope of learning some of the best practices and tools for web development.
+
+Go to [https://www.dean-family.herokuapp.com](http://www.dean-family.herokuapp.com) and log in with the following credentials:
+
+- user name: user
+- password: user
+
+Once logged in, you'll find a home page with a **WebApps** pulldown in the navigation menu. Select either app to use it.
+
+- **Coupon App**: I created this app to experiment with the SMTP mail service. It allows anyone to go in and send a request to my email account.
+- **Timeline App**: This app uses JHipster's _Entity_ feature. I created a visualization to view all "Events" for my family to remember, whether it be vacations we took or excursions we've taken. I didn't fill it completely since it's a public site now.
+
+This application was generated using JHipster 6.3.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.3.1](https://www.jhipster.tech/documentation-archive/v6.3.1).
 
 ## Technology Stack
 
@@ -25,131 +63,43 @@ When generating a JHipster project, there are many different cutting edge techno
 - Build System: Maven
 - Deployment Framework: Heroku
 
-## Usage
-
-Go to [https://www.dean-family.herokuapp.com](http://www.dean-family.herokuapp.com) and log in with the following credentials:
-
-- user name: user
-- password: user
-
-This application was generated using JHipster 6.3.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.3.1](https://www.jhipster.tech/documentation-archive/v6.3.1).
+<!-- GETTING STARTED -->
 
 ## Development
 
-Before you can build this project, you must install and configure the following dependencies on your machine:
+To get a local copy up and running follow these simple steps.
 
-1. [Node.js][]: We use Node to run a development web server and build the project.
-   Depending on your system, you can install Node either from source or as a pre-packaged bundle.
+### Prerequisites
 
-2. [Java 11][]: The back end of the application is based on Sprint Boot 11, which requires Java.
+This is an example of how to list things you need to use the software and how to install them.
 
-3. [docker-compose][]: I used docker-compose to run the PostgreSQL database, since JHipster provided the functionality already built in.
+- npm
+- Java 11
+- docker-compose
 
-## JHipster Documentation
+### Installation
 
-#### The following documentation is taken directly from JHipster's default README.md
+1. Clone the repo
+   ```sh
+   git clone https://github.com/github_username/repo_name.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
 
-After installing Node, you should be able to run the following command to install development tools.
-You will only need to run this command when dependencies change in [package.json](package.json).
+<!-- USAGE EXAMPLES -->
 
-    npm install
+## Usage
 
-We use npm scripts and [Webpack][] as our build system.
-
-Run the following commands in two separate terminals to create a blissful development experience where your browser
-auto-refreshes when files change on your hard drive.
-
-    ./mvnw
-    npm start
-
-Npm is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
-specifying a newer version in [package.json](package.json). You can also run `npm update` and `npm install` to manage dependencies.
-Add the `help` flag on any command to see how you can use it. For example, `npm help update`.
-
-The `npm run` command will list all of the scripts available to run for this project.
-
-### Building for production
-
-#### Packaging as jar
-
-To build the final jar and optimize the alec application for production, run:
-
-    ./mvnw -Pprod clean verify
-
-This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
-To ensure everything worked, run:
-
-    java -jar target/*.jar
-
-Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
-
-Refer to [Using JHipster in production][] for more details.
-
-#### Packaging as war
-
-To package your application as a war in order to deploy it to an application server, run:
-
-    ./mvnw -Pprod,war clean verify
-
-### Testing
-
-To launch your application's tests, run:
-
-    ./mvnw verify
-
-#### Client tests
-
-Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
-
-    npm test
-
-For more information, refer to the [Running tests page][].
-
-#### Code quality
-
-Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
+Run the following command to start the web service.
 
 ```
-docker-compose -f src/main/docker/sonar.yml up -d
+./mvnw
 ```
 
-You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
+See the [JHipster Documentation](https://www.jhipster.tech/documentation-archive/v6.3.1) for more details.
 
-Then, run a Sonar analysis:
+## Acknowledgements
 
-```
-./mvnw -Pprod clean verify sonar:sonar
-```
-
-If you need to re-run the Sonar phase, please be sure to specify at least the `initialize` phase since Sonar properties are loaded from the sonar-project.properties file.
-
-```
-./mvnw initialize sonar:sonar
-```
-
-or
-
-For more information, refer to the [Code quality page][].
-
-### Using Docker to simplify development (optional)
-
-You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
-
-For example, to start a postgresql database in a docker container, run:
-
-    docker-compose -f src/main/docker/postgresql.yml up -d
-
-To stop it and remove the container, run:
-
-    docker-compose -f src/main/docker/postgresql.yml down
-
-You can also fully dockerize your application and all the services that it depends on.
-To achieve this, first build a docker image of your app by running:
-
-    ./mvnw -Pprod verify jib:dockerBuild
-
-Then run:
-
-    docker-compose -f src/main/docker/app.yml up -d
-
-For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
+- [JHipster](https://www.jhipster.tech/)
